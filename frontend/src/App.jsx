@@ -17,7 +17,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white">
+        <div className="min-h-screen text-on-surface font-body-md antialiased selection:bg-steward-gold/30">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />

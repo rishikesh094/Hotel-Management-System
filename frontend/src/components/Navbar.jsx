@@ -20,29 +20,29 @@ export default function Navbar() {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-slate-950/50 backdrop-blur-xl border-b border-white/5 px-8 py-5 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-surface-bright/80 backdrop-blur-xl border-b border-platinum-gray/20 px-8 py-5 transition-all duration-300 shadow-sm">
       <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-serif font-black italic tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent hover:opacity-95 transition">
+          <span className="text-2xl font-display-lg font-black italic tracking-wider text-heritage-navy hover:opacity-95 transition">
             STAYLUXE
           </span>
         </Link>
 
         {/* Desktop Menu links */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link to="/" className={`transition-colors duration-300 ${location.pathname === '/' ? 'text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]' : 'text-gray-300 hover:text-white'}`}>Home</Link>
-          <Link to="/search" className={`transition-colors duration-300 ${location.pathname === '/search' ? 'text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]' : 'text-gray-300 hover:text-white'}`}>Search Hotels</Link>
-          <Link to="/partner" className={`transition-colors duration-300 ${location.pathname === '/partner' ? 'text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]' : 'text-gray-300 hover:text-white'}`}>Become a Partner</Link>
+        <div className="hidden md:flex items-center gap-8 font-label-md text-label-md">
+          <Link to="/" className={`transition-colors duration-300 ${location.pathname === '/' ? 'text-steward-gold font-bold' : 'text-on-surface-variant hover:text-heritage-navy'}`}>Home</Link>
+          <Link to="/search" className={`transition-colors duration-300 ${location.pathname === '/search' ? 'text-steward-gold font-bold' : 'text-on-surface-variant hover:text-heritage-navy'}`}>Search Hotels</Link>
+          <Link to="/partner" className={`transition-colors duration-300 ${location.pathname === '/partner' ? 'text-steward-gold font-bold' : 'text-on-surface-variant hover:text-heritage-navy'}`}>Become a Partner</Link>
           
           {user && (user.role === 'admin' || user.role === 'super_admin') && (
-            <Link to="/admin" className="flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors">
+            <Link to="/admin" className="flex items-center gap-1 text-heritage-navy font-bold hover:text-steward-gold transition-colors">
               <ShieldAlert size={14} /> Admin Portal
             </Link>
           )}
 
           {user && user.role === 'manager' && (
-            <Link to="/manager" className="flex items-center gap-1 text-amber-400 hover:text-amber-300 transition-colors">
+            <Link to="/manager" className="flex items-center gap-1 text-heritage-navy font-bold hover:text-steward-gold transition-colors">
               <Briefcase size={14} /> Manager Panel
             </Link>
           )}
@@ -56,11 +56,11 @@ export default function Navbar() {
               <div className="relative">
                 <button 
                   onClick={() => { setShowNotifications(!showNotifications); setShowProfileDropdown(false); }}
-                  className="relative p-2 rounded-xl bg-slate-900 border border-slate-800 text-gray-400 hover:text-white hover:border-slate-700 transition"
+                  className="relative p-2 rounded-xl bg-surface-container-lowest border border-platinum-gray/50 text-on-surface-variant hover:text-steward-gold hover:border-steward-gold/30 transition shadow-sm"
                 >
                   <Bell size={20} />
                   {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-extrabold text-[9px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-slate-950 animate-pulse">
+                    <span className="absolute -top-1 -right-1 bg-error text-white font-extrabold text-[9px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-surface-bright animate-pulse">
                       {unreadCount}
                     </span>
                   )}
@@ -68,17 +68,17 @@ export default function Navbar() {
 
                 {/* Notifications Dropdown Panel */}
                 {showNotifications && (
-                  <div className="absolute right-0 mt-3 w-80 glass bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in slide-in-from-top-2">
-                    <div className="flex justify-between items-center mb-3 pb-2 border-b border-slate-900">
-                      <h4 className="font-bold text-white text-sm">Notifications</h4>
+                  <div className="absolute right-0 mt-3 w-80 bg-surface-container-lowest border border-platinum-gray rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="flex justify-between items-center mb-3 pb-2 border-b border-platinum-gray/30">
+                      <h4 className="font-title-lg text-title-lg text-heritage-navy text-sm">Notifications</h4>
                       {unreadCount > 0 && (
-                        <button onClick={markAllNotificationsRead} className="text-xs text-indigo-400 hover:underline">Mark all read</button>
+                        <button onClick={markAllNotificationsRead} className="font-label-sm text-steward-gold hover:underline">Mark all read</button>
                       )}
                     </div>
                     
                     <div className="max-h-60 overflow-y-auto space-y-2">
                       {notifications.length === 0 ? (
-                        <p className="text-center text-xs text-gray-500 py-6">No new notifications.</p>
+                        <p className="text-center font-body-md text-xs text-on-surface-variant py-6">No new notifications.</p>
                       ) : (
                         notifications.map((notif) => (
                           <div 
@@ -88,14 +88,14 @@ export default function Navbar() {
                               if (notif.link) navigate(notif.link);
                               setShowNotifications(false);
                             }}
-                            className={`p-3 rounded-xl cursor-pointer transition text-xs border ${
+                            className={`p-3 rounded-xl cursor-pointer transition font-body-md text-xs border ${
                               notif.read 
-                                ? 'bg-slate-900/20 border-transparent text-gray-400' 
-                                : 'bg-indigo-500/5 border-indigo-500/20 text-gray-200 font-semibold'
-                            } hover:bg-slate-800/40`}
+                                ? 'bg-surface-container-low/50 border-transparent text-on-surface-variant' 
+                                : 'bg-steward-gold/5 border-steward-gold/20 text-heritage-navy font-semibold'
+                            } hover:bg-surface-container`}
                           >
                             <p className="leading-snug">{notif.message}</p>
-                            <span className="text-[10px] text-gray-600 block mt-1">
+                            <span className="font-label-sm text-[10px] text-on-surface-variant block mt-1">
                               {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                             </span>
                           </div>
@@ -110,25 +110,25 @@ export default function Navbar() {
               <div className="relative">
                 <button 
                   onClick={() => { setShowProfileDropdown(!showProfileDropdown); setShowNotifications(false); }}
-                  className="flex items-center gap-2 p-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition"
+                  className="flex items-center gap-2 p-2 rounded-xl bg-surface-container-lowest border border-platinum-gray/50 hover:border-steward-gold/30 transition shadow-sm"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                    <User size={16} className="text-indigo-400" />
+                  <div className="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-platinum-gray/30">
+                    <User size={16} className="text-heritage-navy" />
                   </div>
-                  <ChevronDown size={14} className="text-gray-400" />
+                  <ChevronDown size={14} className="text-on-surface-variant" />
                 </button>
 
                 {showProfileDropdown && (
-                  <div className="absolute right-0 mt-3 w-48 glass bg-slate-950 border border-slate-800 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2">
-                    <div className="px-3 py-2 border-b border-slate-900 mb-1">
-                      <p className="text-xs font-bold text-white truncate">{user.name}</p>
-                      <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
+                  <div className="absolute right-0 mt-3 w-48 bg-surface-container-lowest border border-platinum-gray rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2">
+                    <div className="px-3 py-2 border-b border-platinum-gray/30 mb-1">
+                      <p className="font-title-lg text-xs font-bold text-heritage-navy truncate">{user.name}</p>
+                      <p className="font-body-md text-[10px] text-on-surface-variant truncate">{user.email}</p>
                     </div>
                     
                     <Link 
                       to="/profile" 
                       onClick={() => setShowProfileDropdown(false)}
-                      className="flex items-center gap-2 px-3 py-2 text-xs text-gray-300 hover:text-white hover:bg-slate-900 rounded-xl transition"
+                      className="flex items-center gap-2 px-3 py-2 font-label-md text-xs text-on-surface-variant hover:text-heritage-navy hover:bg-surface-container rounded-xl transition"
                     >
                       <User size={14} /> My Profile
                     </Link>
@@ -137,7 +137,7 @@ export default function Navbar() {
                       <Link 
                         to="/manager" 
                         onClick={() => setShowProfileDropdown(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs text-amber-400 hover:text-amber-300 hover:bg-slate-900 rounded-xl transition"
+                        className="flex items-center gap-2 px-3 py-2 font-label-md text-xs text-heritage-navy hover:text-steward-gold hover:bg-surface-container rounded-xl transition"
                       >
                         <Briefcase size={14} /> Manager Panel
                       </Link>
@@ -147,7 +147,7 @@ export default function Navbar() {
                       <Link 
                         to="/admin" 
                         onClick={() => setShowProfileDropdown(false)}
-                        className="flex items-center gap-2 px-3 py-2 text-xs text-teal-400 hover:text-teal-300 hover:bg-slate-900 rounded-xl transition"
+                        className="flex items-center gap-2 px-3 py-2 font-label-md text-xs text-heritage-navy hover:text-steward-gold hover:bg-surface-container rounded-xl transition"
                       >
                         <ShieldAlert size={14} /> Admin Portal
                       </Link>
@@ -155,7 +155,7 @@ export default function Navbar() {
 
                     <button 
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:text-rose-300 hover:bg-slate-900 rounded-xl transition mt-1"
+                      className="w-full flex items-center gap-2 px-3 py-2 font-label-md text-xs text-error hover:text-on-error hover:bg-error/10 rounded-xl transition mt-1"
                     >
                       <LogOut size={14} /> Sign Out
                     </button>
@@ -165,13 +165,13 @@ export default function Navbar() {
             </>
           ) : (
             <div className="flex items-center gap-3">
-              <Link to="/login" className="px-5 py-2.5 text-xs font-bold text-gray-300 hover:text-white border border-white/5 bg-white/5 rounded-xl hover:bg-white/10 hover:border-white/10 transition duration-300">Sign In</Link>
-              <Link to="/register" className="px-5 py-2.5 text-xs font-bold btn-luxury rounded-xl transition duration-300">Sign Up</Link>
+              <Link to="/login" className="px-5 py-2.5 font-label-md text-label-md text-heritage-navy hover:text-steward-gold border border-platinum-gray bg-surface-container-lowest rounded-xl hover:border-steward-gold transition duration-300 shadow-sm">Sign In</Link>
+              <Link to="/register" className="px-5 py-2.5 font-label-md text-label-md bg-heritage-navy text-linen-white rounded-xl hover:bg-primary-container transition duration-300 shadow-lg">Sign Up</Link>
             </div>
           )}
 
           {/* Mobile menu trigger */}
-          <button onClick={() => setShowMobileMenu(!showMobileMenu)} className="md:hidden p-2 text-gray-400 hover:text-white">
+          <button onClick={() => setShowMobileMenu(!showMobileMenu)} className="md:hidden p-2 text-on-surface-variant hover:text-heritage-navy">
             <AlignJustify size={20} />
           </button>
         </div>
@@ -179,17 +179,17 @@ export default function Navbar() {
 
       {/* Mobile Menu Panel */}
       {showMobileMenu && (
-        <div className="md:hidden mt-4 pt-4 border-t border-slate-900 flex flex-col gap-3 text-sm font-medium animate-in slide-in-from-top-4">
-          <Link to="/" onClick={() => setShowMobileMenu(false)} className="text-gray-300 py-1 hover:text-white">Home</Link>
-          <Link to="/search" onClick={() => setShowMobileMenu(false)} className="text-gray-300 py-1 hover:text-white">Search Hotels</Link>
-          <Link to="/partner" onClick={() => setShowMobileMenu(false)} className="text-gray-300 py-1 hover:text-white">Become a Partner</Link>
+        <div className="md:hidden mt-4 pt-4 border-t border-platinum-gray/30 flex flex-col gap-3 font-label-md text-sm bg-surface-container-lowest p-4 rounded-xl shadow-lg animate-in slide-in-from-top-4">
+          <Link to="/" onClick={() => setShowMobileMenu(false)} className="text-on-surface-variant py-2 hover:text-heritage-navy border-b border-platinum-gray/10">Home</Link>
+          <Link to="/search" onClick={() => setShowMobileMenu(false)} className="text-on-surface-variant py-2 hover:text-heritage-navy border-b border-platinum-gray/10">Search Hotels</Link>
+          <Link to="/partner" onClick={() => setShowMobileMenu(false)} className="text-on-surface-variant py-2 hover:text-heritage-navy border-b border-platinum-gray/10">Become a Partner</Link>
           
           {user && (user.role === 'admin' || user.role === 'super_admin') && (
-            <Link to="/admin" onClick={() => setShowMobileMenu(false)} className="text-teal-400 py-1 hover:text-teal-300">Admin Portal</Link>
+            <Link to="/admin" onClick={() => setShowMobileMenu(false)} className="text-heritage-navy font-bold py-2 hover:text-steward-gold border-b border-platinum-gray/10">Admin Portal</Link>
           )}
 
           {user && user.role === 'manager' && (
-            <Link to="/manager" onClick={() => setShowMobileMenu(false)} className="text-amber-400 py-1 hover:text-amber-300">Manager Panel</Link>
+            <Link to="/manager" onClick={() => setShowMobileMenu(false)} className="text-heritage-navy font-bold py-2 hover:text-steward-gold">Manager Panel</Link>
           )}
         </div>
       )}
